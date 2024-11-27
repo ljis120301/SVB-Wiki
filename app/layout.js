@@ -1,5 +1,5 @@
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
-import { AppSidebar } from "@/components/svb-sidebar"
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { AppSidebar } from "@/components/svb-sidebar";
 
 import localFont from "next/font/local";
 import "./globals.css";
@@ -32,11 +32,11 @@ export default function RootLayout({ children }) {
             <main className="flex-1">
               <div className="flex items-center p-4 border-b">
                 <SidebarTrigger />
-                <h1 className="ml-4 text-xl font-bold">Sun Valley Broadband Dashboard</h1>
+                <h1 className="ml-4 text-xl font-bold">
+                  Sun Valley Broadband Dashboard
+                </h1>
               </div>
-              <div className="p-8">
-                {children}
-              </div>
+              <div className="p-8">{children}</div>
             </main>
           </div>
         </SidebarProvider>

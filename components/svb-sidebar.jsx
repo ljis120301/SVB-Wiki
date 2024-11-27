@@ -1,5 +1,6 @@
-"use client"
+"use client";
 
+import { useState, useEffect } from "react";
 import {
   Sidebar,
   SidebarContent,
@@ -10,69 +11,80 @@ import {
   SidebarMenu,
   SidebarMenuItem,
   SidebarMenuButton,
-  useSidebar
-} from "@/components/ui/sidebar"
-import { Home, Network, Map, AlertTriangle, FileText, Settings, User2, Folder } from "lucide-react"
-import Image from "next/image"
+  useSidebar,
+} from "@/components/ui/sidebar";
+import {
+  Home,
+  Network,
+  Map,
+  AlertTriangle,
+  FileText,
+  Settings,
+  User2,
+  Folder,
+} from "lucide-react";
+import Image from "next/image";
 
 const routes = [
   {
     title: "Dashboard",
     icon: Home,
-    href: "/"
+    href: "/",
   },
   {
     title: "Customer",
     icon: Folder,
-    href: "/customers"
+    href: "/customers",
   },
   {
     title: "Expedience",
     icon: Folder,
-    href: "/expedience"
+    href: "/expedience",
   },
   {
     title: "Guide",
     icon: Folder,
-    href: "/guide"
+    href: "/guide",
   },
   {
     title: "Microtik",
     icon: Folder,
-    href: "/microtik"
+    href: "/microtik",
   },
   {
     title: "Network",
     icon: Folder,
-    href: "/network"
+    href: "/network",
   },
   {
     title: "Settings",
     icon: Settings,
-    href: "/settings"
-  }
-]
+    href: "/settings",
+  },
+];
 
 export function AppSidebar() {
-  const { isCollapsed } = useSidebar()
-  
+  const { open, toggle } = useSidebar();
+
+  useEffect(() => {
+    console.log(`Sidebar is now ${open ? "open" : "closed"}`);
+  }, [open]);
+
   return (
-    <Sidebar collapsible="icon">
-      <SidebarHeader className="border-b p-4">
-        {isCollapsed ? (
-          <div className="flex justify-center">
+    <Sidebar open={open} onToggle={toggle} collapsible="icon">
+      <SidebarHeader className="border-b p-1 pb-4">
+        <div className="flex justify-center">
+          <a href="/">
             <Image
-              src="/SVB-Transparent-Logo.svg"
+              src={open ? "/Transparent-Logo.png" : "/Favicon-Transparent.ico"}
               alt="SVB Logo"
-              width={20}
-              height={20}
+              width={200}
+              height={200}
               className="dark:invert"
               priority
             />
-          </div>
-        ) : (
-          <h2 className="text-lg font-semibold truncate">Sun Valley Broadband</h2>
-        )}
+          </a>
+        </div>
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
@@ -103,5 +115,5 @@ export function AppSidebar() {
         </SidebarMenu>
       </SidebarFooter>
     </Sidebar>
-  )
-} 
+  );
+}
