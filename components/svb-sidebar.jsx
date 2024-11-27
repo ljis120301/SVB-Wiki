@@ -25,7 +25,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 
-const routes = [
+const getRoutes = (id) => [
   {
     title: "Dashboard",
     icon: Home,
