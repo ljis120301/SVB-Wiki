@@ -1,10 +1,32 @@
+'use client'
+
 import Image from "next/image";
+import Search from "../components/Search";
+import { useState } from "react";
 
 export default function Home() {
+  // Define the searchable content
+  const wikiContent = [
+    {
+      title: "Welcome",
+      content: "Welcome to Beamspeed's wiki. The goal of this site is to centralize documentation pertaining to the infrastructure which powers Beamspeed's network. Documents contained herein will attempt to provide the reader with site specific details regarding Beamspeed's implementation of various hardware & software which powers our operational network."
+    },
+    {
+      title: "Target audience",
+      content: "This site is primarily geared toward IT professionals such as field technicians, customer support representatives, and system / network administrators. Some concepts may be easily understood by those not serving directly in a technical capacity."
+    },
+    {
+      title: "Getting started",
+      content: "Use the search bar to find any topics you need information on or click on Overview to see all pages in this wiki."
+    }
+  ];
+
   return (
     <div className="min-h-screen p-8 font-sans">
       <main className="max-w-4xl mx-auto">
         <h1 className="text-3xl font-bold mb-6">Beamspeed's Wiki</h1>
+
+        <Search content={wikiContent} />
 
         <section className="mb-8">
           <h2 className="text-2xl font-semibold mb-4">Table of Contents</h2>

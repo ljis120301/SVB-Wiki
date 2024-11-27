@@ -12,49 +12,102 @@ import {
   SidebarMenuButton,
   useSidebar
 } from "@/components/ui/sidebar"
-import { Home, Network, Map, AlertTriangle, FileText, Settings, User2, Folder } from "lucide-react"
+import { Home, Network, Map, AlertTriangle, FileText, Settings, User2, Folder, File, Users } from "lucide-react"
 import Image from "next/image"
+import { useParams } from 'next/navigation'
 
-const routes = [
+const getRoutes = (id) => [
   {
     title: "Dashboard",
     icon: Home,
-    href: "/"
+    href: `/`
   },
   {
     title: "Customer",
-    icon: Folder,
-    href: "/customers"
+    icon: Users,
+    href: `/customers`
   },
   {
     title: "Expedience",
     icon: Folder,
-    href: "/expedience"
+    href: `/${id}/expedience`
   },
   {
     title: "Guide",
     icon: Folder,
-    href: "/guide"
+    href: `/${id}/guide`
   },
   {
     title: "Microtik",
     icon: Folder,
-    href: "/microtik"
+    href: `/${id}/microtik`
   },
   {
     title: "Network",
     icon: Folder,
-    href: "/network"
+    href: `/${id}/network`
+  },
+  {
+    title: "VOIP",
+    icon: Folder,
+    href: `/${id}/voip`
+  },
+  {
+    title: "BGP",
+    icon: File,
+    href: `/${id}/bgp`
+  },
+  {
+    title: "Brocade CES Template",
+    icon: File,
+    href: `/${id}/brocade-ces-template`
+  },
+  {
+    title: "Catalyst 3750 Template",
+    icon: File,
+    href: `/${id}/catalyst-3750-template`
+  },
+  {
+    title: "Dockerfile",
+    icon: File,
+    href: `/${id}/dockerfile`
+  },
+  {
+    title: "Email",
+    icon: File,
+    href: `/${id}/email`
+  },
+  {
+    title: "Inventory and Ordering",
+    icon: File,
+    href: `/${id}/inventory-and-ordering`
+  },
+  {
+    title: "Platypus",
+    icon: Folder,
+    href: `/${id}/platypus`
+  },
+  {
+    title: "Puppet",
+    icon: Folder,
+    href: `/${id}/puppet`
+  },
+  {
+    title: "README",
+    icon: File,
+    href: `/${id}/readme`
   },
   {
     title: "Settings",
     icon: Settings,
-    href: "/settings"
-  }
+    href: `/${id}/settings`
+  },
 ]
 
 export function AppSidebar() {
   const { isCollapsed } = useSidebar()
+  const params = useParams()
+  const routes = getRoutes(params.id)
   
   return (
     <Sidebar collapsible="icon">
