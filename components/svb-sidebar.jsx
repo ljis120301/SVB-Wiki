@@ -64,30 +64,30 @@ const routes = [
 ];
 
 export function AppSidebar() {
-  const { open, toggle } = useSidebar();
+  const { open, toggle, isMobile } = useSidebar();
 
   return (
     <Sidebar 
       open={open} 
       onToggle={toggle} 
-      collapsible="icon"
-      className="bg-background dark:bg-background-dark"
+      collapsible={isMobile ? "offcanvas" : "icon"}
+      className="bg-background dark:bg-background-dark border-r border-border dark:border-border-dark"
     >
       <SidebarHeader className="border-b border-border dark:border-border-dark h-[65px] flex items-center justify-center">
         <div className="flex justify-center w-full">
           <a href="/">
             <Image
-              src={open ? "/Transparent-Logo.png" : "/Favicon-Transparent.ico"}
+              src={open && !isMobile ? "/Transparent-Logo.png" : "/Favicon-Transparent.ico"}
               alt="SVB Logo"
-              width={open ? 180 : 50}
-              height={open ? 180 : 50}
-              className={`select-none ${!open ? 'py-1.5' : ''}`}
+              width={open && !isMobile ? 180 : 50}
+              height={open && !isMobile ? 180 : 50}
+              className={`select-none ${!open || isMobile ? 'py-1.5' : ''}`}
               priority
             />
           </a>
         </div>
       </SidebarHeader>
-      <SidebarContent>
+      <SidebarContent className="overflow-y-auto">
         <SidebarGroup>
           <SidebarGroupContent>
             <SidebarMenu>
@@ -95,7 +95,8 @@ export function AppSidebar() {
                 <SidebarMenuItem key={route.title}>
                   <SidebarMenuButton 
                     asChild 
-                    className="text-foreground dark:text-foreground-dark hover:bg-secondary dark:hover:bg-secondary-dark"
+                    className="text-foreground dark:text-foreground-dark hover:bg-secondary dark:hover:bg-secondary-dark transition-colors"
+                    tooltip={route.title}
                   >
                     <a href={route.href}>
                       <route.icon className="h-4 w-4" />
@@ -108,10 +109,13 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter className="border-t border-border dark:border-border-dark p-4">
+      <SidebarFooter className="border-t border-border dark:border-border-dark p-4 mt-auto">
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton className="text-foreground dark:text-foreground-dark hover:bg-secondary dark:hover:bg-secondary-dark">
+            <SidebarMenuButton 
+              className="text-foreground dark:text-foreground-dark hover:bg-secondary dark:hover:bg-secondary-dark transition-colors"
+              tooltip="Profile"
+            >
               <User2 className="h-4 w-4" />
               <span>Profile</span>
             </SidebarMenuButton>
