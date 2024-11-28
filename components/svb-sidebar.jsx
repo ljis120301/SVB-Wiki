@@ -13,7 +13,7 @@ import {
   SidebarMenuButton,
   useSidebar,
 } from "@/components/ui/sidebar";
-import { Home, Settings, User2, Folder, UsersRound } from "lucide-react";
+import { Home, Settings, User2, Folder, UsersRound, EthernetPort } from "lucide-react";
 
 const AnsibleIcon = ({ className }) => (
   <svg
@@ -96,7 +96,7 @@ const routes = [
   },
   {
     title: "Network",
-    icon: Folder,
+    icon: EthernetPort,
     href: "/network",
   },
   {
