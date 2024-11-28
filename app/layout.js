@@ -2,6 +2,7 @@ import { ThemeProvider } from "next-themes"
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
 import { AppSidebar } from "@/components/svb-sidebar"
 import { ThemeToggle } from "@/components/theme-toggle"
+import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
 
 import localFont from "next/font/local";
 import "./globals.css";
@@ -27,14 +28,14 @@ export default function RootLayout({ children }) {
     <html lang="en" suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background dark:bg-background-dark text-foreground dark:text-foreground-dark`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <SidebarProvider>
-            <div className="flex min-h-screen">
+          <SidebarProvider defaultOpen={true}>
+            <div className="relative flex min-h-screen">
               <AppSidebar />
               <main className="flex-1">
-                <div className="flex items-center justify-between h-[65px] px-4 border-b border-border dark:border-border-dark">
+                <div className="sticky top-0 z-20 flex items-center justify-between h-[65px] px-4 border-b border-border dark:border-border-dark bg-background dark:bg-background-dark">
                   <div className="flex items-center flex-1">
-                    <SidebarTrigger />
-                    <h1 className="ml-4 text-xl font-bold text-foreground dark:text-foreground-dark">
+                    <SidebarTrigger className="relative z-50" />
+                    <h1 className="ml-4 text-xl font-bold text-foreground dark:text-foreground-dark truncate">
                       Sun Valley Broadband Dashboard
                     </h1>
                   </div>
@@ -42,7 +43,7 @@ export default function RootLayout({ children }) {
                     <ThemeToggle />
                   </div>
                 </div>
-                <div className="p-8">{children}</div>
+                <div className="p-4 md:p-8">{children}</div>
               </main>
             </div>
           </SidebarProvider>

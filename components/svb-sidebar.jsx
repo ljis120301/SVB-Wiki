@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   Sidebar,
   SidebarContent,
@@ -13,17 +13,9 @@ import {
   SidebarMenuButton,
   useSidebar,
 } from "@/components/ui/sidebar";
-import {
-  Home,
-  Network,
-  Map,
-  AlertTriangle,
-  FileText,
-  Settings,
-  User2,
-  Folder,
-} from "lucide-react";
+import { Home, Settings, User2, Folder } from "lucide-react";
 import Image from "next/image";
+import { cn } from "@/lib/utils";
 
 const routes = [
   {
@@ -64,24 +56,32 @@ const routes = [
 ];
 
 export function AppSidebar() {
-  const { open, toggle, isMobile } = useSidebar();
-
+  const { state, isMobile, openMobile, setOpenMobile } = useSidebar();
+  
   return (
     <Sidebar 
-      open={open} 
-      onToggle={toggle} 
       collapsible={isMobile ? "offcanvas" : "icon"}
-      className="bg-background dark:bg-background-dark border-r border-border dark:border-border-dark"
+      className={cn(
+        "bg-background dark:bg-background-dark",
+        "border-r border-border dark:border-border-dark",
+        "[&_.fixed]:!bg-background/0",
+        "[&_[role=dialog]]:!bg-background [&_[role=dialog]]:!dark:bg-background-dark",
+        "[&_.fixed]:!backdrop-blur-none",
+        "[&>div>.fixed]:!bg-transparent",
+        "data-[state=open]:!bg-background data-[state=open]:!dark:bg-background-dark",
+        "[&_[data-mobile=true]]:!bg-background [&_[data-mobile=true]]:!dark:bg-background-dark",
+        "[&_[data-state=open]]:!bg-background [&_[data-state=open]]:!dark:bg-background-dark"
+      )}
     >
       <SidebarHeader className="border-b border-border dark:border-border-dark h-[65px] flex items-center justify-center">
         <div className="flex justify-center w-full">
           <a href="/">
             <Image
-              src={open && !isMobile ? "/Transparent-Logo.png" : "/Favicon-Transparent.ico"}
+              src={state === "expanded" && !isMobile ? "/Transparent-Logo.png" : "/Favicon-Transparent.ico"}
               alt="SVB Logo"
-              width={open && !isMobile ? 180 : 50}
-              height={open && !isMobile ? 180 : 50}
-              className={`select-none ${!open || isMobile ? 'py-1.5' : ''}`}
+              width={state === "expanded" && !isMobile ? 180 : 50}
+              height={state === "expanded" && !isMobile ? 180 : 50}
+              className={`select-none ${state === "collapsed" || isMobile ? 'py-1.5' : ''}`}
               priority
             />
           </a>
@@ -95,10 +95,18 @@ export function AppSidebar() {
                 <SidebarMenuItem key={route.title}>
                   <SidebarMenuButton 
                     asChild 
-                    className="text-foreground dark:text-foreground-dark hover:bg-secondary dark:hover:bg-secondary-dark transition-colors"
+                    className={cn(
+                      "text-foreground dark:text-foreground-dark",
+                      "hover:bg-secondary dark:hover:bg-secondary-dark transition-colors",
+                      "[&_[data-mobile=true]]:text-foreground [&_[data-mobile=true]]:dark:text-foreground-dark",
+                      "[&_[data-mobile=true]]:hover:bg-secondary [&_[data-mobile=true]]:dark:hover:bg-secondary-dark"
+                    )}
                     tooltip={route.title}
                   >
-                    <a href={route.href}>
+                    <a 
+                      href={route.href}
+                      onClick={() => isMobile && setOpenMobile(false)}
+                    >
                       <route.icon className="h-4 w-4" />
                       <span>{route.title}</span>
                     </a>
@@ -113,7 +121,12 @@ export function AppSidebar() {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton 
-              className="text-foreground dark:text-foreground-dark hover:bg-secondary dark:hover:bg-secondary-dark transition-colors"
+              className={cn(
+                "text-foreground dark:text-foreground-dark",
+                "hover:bg-secondary dark:hover:bg-secondary-dark transition-colors",
+                "[&_[data-mobile=true]]:text-foreground [&_[data-mobile=true]]:dark:text-foreground-dark",
+                "[&_[data-mobile=true]]:hover:bg-secondary [&_[data-mobile=true]]:dark:hover:bg-secondary-dark"
+              )}
               tooltip="Profile"
             >
               <User2 className="h-4 w-4" />

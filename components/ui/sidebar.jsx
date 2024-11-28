@@ -168,7 +168,15 @@ const Sidebar = React.forwardRef((
         <SheetContent
           data-sidebar="sidebar"
           data-mobile="true"
-          className="w-[--sidebar-width] bg-sidebar p-0 text-sidebar-foreground [&>button]:hidden"
+          className={cn(
+            "w-[--sidebar-width]",
+            "bg-background dark:bg-background-dark",
+            "p-0",
+            "text-foreground dark:text-foreground-dark",
+            "[&>button]:hidden",
+            "border-r border-border dark:border-border-dark",
+            "[&_.fixed]:bg-background/80 dark:bg-background-dark/80"
+          )}
           side={side}
         >
           <DialogTitle className="sr-only">Navigation Menu</DialogTitle>
