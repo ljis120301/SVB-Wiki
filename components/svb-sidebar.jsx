@@ -13,7 +13,58 @@ import {
   SidebarMenuButton,
   useSidebar,
 } from "@/components/ui/sidebar";
-import { Home, Settings, User2, Folder } from "lucide-react";
+import { Home, Settings, User2, Folder, UsersRound } from "lucide-react";
+
+const AnsibleIcon = ({ className }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+  >
+    <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 2c4.418 0 8 3.582 8 8s-3.582 8-8 8-8-3.582-8-8 3.582-8 8-8zm-1.252 3.456l3.75 8.75-1.842-.789-2.383-5.557-2.393 3.795-1.367-.867 4.235-5.332z" />
+  </svg>
+);
+
+const PythonIcon = ({ className }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+  >
+    <path d="M12 2c-2.121 0-3.5.884-4.167 2.167C7.166 5.45 7 6.667 7 8v2h5v1H6.5c-1.333 0-2.5.5-3.167 1.667C2.666 13.833 2 15.667 2 18c0 2.333.666 4.167 1.333 5.333C4 24.5 5.167 25 6.5 25h3v-4c0-1.333.5-2 1.5-2h5c1 0 1.5.667 1.5 2v4h3c1.333 0 2.5-.5 3.167-1.667C24.334 22.167 25 20.333 25 18c0-2.333-.666-4.167-1.333-5.333C23 11.5 21.833 11 20.5 11H15v-1h5V8c0-1.333-.166-2.55-.833-3.833C18.5 2.884 17.121 2 15 2h-3z" />
+    <circle cx="9.5" cy="6.5" r="1" />
+    <circle cx="17.5" cy="19.5" r="1" />
+  </svg>
+);
+
+const MikrotikIcon = ({ className }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+  >
+    <path d="M12 3L3 8.2v7.6L12 21l9-5.2V8.2L12 3z" />
+    <path d="M12 8v8" />
+    <path d="M8 10v4" />
+    <path d="M16 10v4" />
+  </svg>
+);
+
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 
@@ -25,7 +76,7 @@ const routes = [
   },
   {
     title: "Customer",
-    icon: Folder,
+    icon: UsersRound,
     href: "/customers",
   },
   {
@@ -34,13 +85,13 @@ const routes = [
     href: "/expedience",
   },
   {
-    title: "Guide",
-    icon: Folder,
-    href: "/guide",
+    title: "Ansible Guide",
+    icon: AnsibleIcon,
+    href: "/ansible-guide",
   },
   {
     title: "Microtik",
-    icon: Folder,
+    icon: MikrotikIcon,
     href: "/microtik",
   },
   {

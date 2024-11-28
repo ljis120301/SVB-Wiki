@@ -31,49 +31,50 @@ export default function CocopahPage() {
   }
 
   return (
-    <div className="p-6">
-      <Breadcrumb className="mb-6">
-        <BreadcrumbList>
-          <BreadcrumbItem>
-            <BreadcrumbLink href="/">Home</BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbLink href="/customers">Customers</BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbPage>Cocopah Indian Tribe</BreadcrumbPage>
-          </BreadcrumbItem>
-        </BreadcrumbList>
-      </Breadcrumb>
+    <div className="p-6 w-full">
+      <div className="w-full overflow-hidden">
+        <Breadcrumb className="mb-6 w-full overflow-hidden">
+          <BreadcrumbList className="flex-wrap">
+            <BreadcrumbItem className="break-all">
+              <BreadcrumbLink href="/">Home</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem className="break-all">
+              <BreadcrumbLink href="/customers">Customers</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem className="break-all">
+              <BreadcrumbPage>Cocopah Indian Tribe</BreadcrumbPage>
+            </BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
 
-      <div className="space-y-6">
-        <h1 className="text-3xl font-bold">Cocopah Indian Tribe</h1>
-        
+        <div className="space-y-6 w-full overflow-hidden">
+          <h1 className="text-3xl font-bold break-all">Cocopah Indian Tribe</h1>
 
-        <div className="space-y-4">
-          <h2 className="text-2xl font-semibold">Table of Contents</h2>
-          <ul className="list-disc pl-8 space-y-2">
-            <li>
-              <a href="#mikrotik-config" className="hover:text-blue-600">
-                MikroTik AP Configuration
-              </a>
-            </li>
-            <li>
-              <a href="#last-modified" className="hover:text-blue-600">
-                Last Modified
-              </a>
-            </li>
-          </ul>
-        </div>
+          <div className="space-y-4 w-full overflow-hidden">
+            <h2 className="text-2xl font-semibold break-all">Table of Contents</h2>
+            <ul className="list-disc pl-8 space-y-2">
+              <li className="break-all">
+                <a href="#mikrotik-config" className="hover:text-blue-600 break-all">
+                  MikroTik AP Configuration
+                </a>
+              </li>
+              <li className="break-all">
+                <a href="#last-modified" className="hover:text-blue-600 break-all">
+                  Last Modified
+                </a>
+              </li>
+            </ul>
+          </div>
 
-        <div className="space-y-6">
-          <h2 id="mikrotik-config" className="text-2xl font-semibold scroll-mt-16">
-            MikroTik AP Configuration
-          </h2>
-          
-          <div className="bg-black text-green-400 p-6 rounded-lg font-mono whitespace-pre overflow-x-auto text-sm leading-relaxed shadow-lg">
+          <div className="space-y-6 w-full overflow-hidden">
+            <h2 id="mikrotik-config" className="text-2xl font-semibold scroll-mt-16 break-all">
+              MikroTik AP Configuration
+            </h2>
+            
+            <div className="bg-black text-green-400 p-6 rounded-lg font-mono text-sm shadow-lg">
+              <pre className="whitespace-pre-wrap break-words leading-relaxed">
 {`/interface bridge
 add l2mtu=2290 name=bridge1 priority=0x1000 protocol-mode=rstp
 add name=loopback0
@@ -290,13 +291,15 @@ set authenticate=no
 add
 add interface=vlan73
 add interface=wlan1`}
-          </div>
+              </pre>
+            </div>
 
-          <div id="last-modified" className="mt-8 p-4 border rounded-lg">
-            <h2 className="text-xl font-semibold mb-2">Last Modified</h2>
-            <p className="text-gray-600">
-              Last configuration update: {new Date().toLocaleDateString()}
-            </p>
+            <div id="last-modified" className="mt-8 p-4 border rounded-lg w-full overflow-hidden">
+              <h2 className="text-xl font-semibold mb-2 break-all">Last Modified</h2>
+              <p className="text-gray-600 break-all">
+                Last configuration update: {new Date().toLocaleDateString()}
+              </p>
+            </div>
           </div>
         </div>
       </div>
