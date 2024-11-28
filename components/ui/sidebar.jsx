@@ -3,6 +3,12 @@ import * as React from "react"
 import { Slot } from "@radix-ui/react-slot"
 import { cva } from "class-variance-authority";
 import { PanelLeft } from "lucide-react"
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
 
 import { useIsMobile } from "@/hooks/use-mobile"
 import { cn } from "@/lib/utils"
@@ -163,13 +169,10 @@ const Sidebar = React.forwardRef((
           data-sidebar="sidebar"
           data-mobile="true"
           className="w-[--sidebar-width] bg-sidebar p-0 text-sidebar-foreground [&>button]:hidden"
-          style={
-            {
-              "--sidebar-width": SIDEBAR_WIDTH_MOBILE
-            }
-          }
-          side={side}>
-          <div className="flex h-full w-full flex-col">{children}</div>
+          side={side}
+        >
+          <DialogTitle className="sr-only">Navigation Menu</DialogTitle>
+          {children}
         </SheetContent>
       </Sheet>)
     );

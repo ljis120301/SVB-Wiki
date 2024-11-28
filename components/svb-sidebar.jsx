@@ -66,21 +66,22 @@ const routes = [
 export function AppSidebar() {
   const { open, toggle } = useSidebar();
 
-  useEffect(() => {
-    console.log(`Sidebar is now ${open ? "open" : "closed"}`);
-  }, [open]);
-
   return (
-    <Sidebar open={open} onToggle={toggle} collapsible="icon">
-      <SidebarHeader className="border-b p-1 pb-4">
-        <div className="flex justify-center">
+    <Sidebar 
+      open={open} 
+      onToggle={toggle} 
+      collapsible="icon"
+      className="bg-background dark:bg-background-dark"
+    >
+      <SidebarHeader className="border-b border-border dark:border-border-dark h-[65px] flex items-center justify-center">
+        <div className="flex justify-center w-full">
           <a href="/">
             <Image
               src={open ? "/Transparent-Logo.png" : "/Favicon-Transparent.ico"}
               alt="SVB Logo"
-              width={200}
-              height={200}
-              className="dark:invert"
+              width={open ? 180 : 50}
+              height={open ? 180 : 50}
+              className={`select-none ${!open ? 'py-1.5' : ''}`}
               priority
             />
           </a>
@@ -92,7 +93,10 @@ export function AppSidebar() {
             <SidebarMenu>
               {routes.map((route) => (
                 <SidebarMenuItem key={route.title}>
-                  <SidebarMenuButton asChild>
+                  <SidebarMenuButton 
+                    asChild 
+                    className="text-foreground dark:text-foreground-dark hover:bg-secondary dark:hover:bg-secondary-dark"
+                  >
                     <a href={route.href}>
                       <route.icon className="h-4 w-4" />
                       <span>{route.title}</span>
@@ -104,10 +108,10 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter className="border-t p-4">
+      <SidebarFooter className="border-t border-border dark:border-border-dark p-4">
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton>
+            <SidebarMenuButton className="text-foreground dark:text-foreground-dark hover:bg-secondary dark:hover:bg-secondary-dark">
               <User2 className="h-4 w-4" />
               <span>Profile</span>
             </SidebarMenuButton>
