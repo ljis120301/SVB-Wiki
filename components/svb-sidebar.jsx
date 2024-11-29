@@ -13,7 +13,7 @@ import {
   SidebarMenuButton,
   useSidebar,
 } from "@/components/ui/sidebar";
-import { Home, Settings, User2, Folder, UsersRound, EthernetPort } from "lucide-react";
+import { Home, Settings, User2, Folder, UsersRound, EthernetPort, Phone, Waypoints, Network, Mail } from "lucide-react";
 
 const AnsibleIcon = ({ className }) => (
   <svg
@@ -44,6 +44,51 @@ const PythonIcon = ({ className }) => (
     <path d="M12 2c-2.121 0-3.5.884-4.167 2.167C7.166 5.45 7 6.667 7 8v2h5v1H6.5c-1.333 0-2.5.5-3.167 1.667C2.666 13.833 2 15.667 2 18c0 2.333.666 4.167 1.333 5.333C4 24.5 5.167 25 6.5 25h3v-4c0-1.333.5-2 1.5-2h5c1 0 1.5.667 1.5 2v4h3c1.333 0 2.5-.5 3.167-1.667C24.334 22.167 25 20.333 25 18c0-2.333-.666-4.167-1.333-5.333C23 11.5 21.833 11 20.5 11H15v-1h5V8c0-1.333-.166-2.55-.833-3.833C18.5 2.884 17.121 2 15 2h-3z" />
     <circle cx="9.5" cy="6.5" r="1" />
     <circle cx="17.5" cy="19.5" r="1" />
+  </svg>
+);
+const NetworkSwitchIcon = ({ className }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+  >
+    <rect x="2" y="4" width="20" height="16" rx="2" />
+    <path d="M6 8h12" />
+    <path d="M6 12h12" />
+    <path d="M6 16h12" />
+    <circle cx="4" cy="8" r="1" fill="currentColor" />
+    <circle cx="4" cy="12" r="1" fill="currentColor" />
+    <circle cx="4" cy="16" r="1" fill="currentColor" />
+    <circle cx="20" cy="8" r="1" fill="currentColor" />
+    <circle cx="20" cy="12" r="1" fill="currentColor" />
+    <circle cx="20" cy="16" r="1" fill="currentColor" />
+  </svg>
+);
+const NetworkSwitchIcon2 = ({ className }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor" 
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+  >
+    <rect x="2" y="6" width="20" height="12" rx="1" />
+    <line x1="6" y1="10" x2="6" y2="14" />
+    <line x1="10" y1="10" x2="10" y2="14" />
+    <line x1="14" y1="10" x2="14" y2="14" />
+    <line x1="18" y1="10" x2="18" y2="14" />
+    <circle cx="6" cy="12" r="1" fill="currentColor" />
+    <circle cx="10" cy="12" r="1" fill="currentColor" />
+    <circle cx="14" cy="12" r="1" fill="currentColor" />
+    <circle cx="18" cy="12" r="1" fill="currentColor" />
   </svg>
 );
 
@@ -96,13 +141,43 @@ const routes = [
   },
   {
     title: "Network",
-    icon: EthernetPort,
+    icon: Network,
     href: "/network",
   },
   {
     title: "Settings",
     icon: Settings,
     href: "/settings",
+  },
+  {
+    title: "VOIP",
+    icon: Phone,
+    href: "/voip",
+  },
+  {
+    title: "BGP",
+    icon: Waypoints,
+    href: "/bgp",
+  },
+  {
+    title: "Brocade CES",
+    icon: NetworkSwitchIcon,
+    href: "/brocade-ces-template",
+  },
+  {
+    title: "Catalyst 3750 template",
+    icon: NetworkSwitchIcon2,
+    href: "/catalyst-3750-template",
+  },
+  {
+    title: "Email",
+    icon: Mail,
+    href: "/email",
+  },
+  {
+    title: "Inventory and Ordering",
+    icon: EthernetPort,
+    href: "/inventory-and-ordering",
   },
 ];
 
