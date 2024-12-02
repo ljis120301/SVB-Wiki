@@ -9,6 +9,8 @@ import {
   BreadcrumbPage,
 } from "@/components/ui/breadcrumb"
 
+import TerminalCard from "@/components/ui/terminal-card"
+
 export default function CleartalkPage() {
   return (
     <div className="p-6">
@@ -87,28 +89,33 @@ export default function CleartalkPage() {
               
               <div className="space-y-4">
                 <h5 id="yuma" className="text-lg font-semibold scroll-mt-16">Yuma</h5>
-                <div className="bg-black text-green-400 p-4 rounded-lg font-mono">
-                  <p>Router: nyl-fw-01.beamspeed.net (MikroTik)</p>
-                  <p>Interface: vlan115</p>
-                  <p>VLAN ID: 115</p>
-                  <p>VRF: CUST-5634-1</p>
-                  <p>Route Distinguisher: 65002:5634001</p>
-                  <p>Route Target Import: 65000:5634002</p>
-                  <p>Route Target Export: 65002:5634001</p>
-                  <p className="mt-4">Network: 10.14.1.112/28</p>
-                  <p>Gateway: 10.14.1.113</p>
-                </div>
+                <TerminalCard>{[
+                  "Router: nyl-fw-01.beamspeed.net (MikroTik)",
+                  "Interface: vlan115",
+                  "VLAN ID: 115",
+                  "VRF: CUST-5634-1",
+                  "Route Distinguisher: 65002:5634001",
+                  "Route Target Import: 65000:5634002",
+                  "Route Target Export: 65002:5634001",
+                  "Network: 10.14.1.112/28",
+                  "Gateway: 10.14.1.113"
+                ]}</TerminalCard>
 
                 <h5 id="el-centro" className="text-lg font-semibold scroll-mt-16">El Centro</h5>
-                <div className="bg-black text-green-400 p-4 rounded-lg font-mono">
-                  <p>Router: ipl-core-01.beamspeed.net (Cisco)</p>
-                  <p>Interface: Fa4/0.203</p>
-                  <p>VLAN ID: 203</p>
-                  <p>VRF: CUST-5634-2</p>
-                  <p>Route Distinguisher: 65000:5634002</p>
-                  <p>Route Target Import 65002:5634001</p>
-                  <p>Route Target Export 65000:5634002</p>
-                </div>
+                <TerminalCard>{[
+                  "Router: ipl-core-01.beamspeed.net (Cisco)",
+                  "Interface: Fa4/0.203",
+                 
+                  "VLAN ID: 203",
+                  
+                  "VRF: CUST-5634-2",
+                  
+                  "Route Distinguisher: 65000:5634002",
+                  
+                  "Route Target Import 65002:5634001",
+                  
+                  "Route Target Export 65000:5634002"
+                ]}</TerminalCard>
               </div>
             </div>
           </section>

@@ -9,6 +9,8 @@ import {
   BreadcrumbPage,
 } from "@/components/ui/breadcrumb"
 
+import TerminalCard from "@/components/ui/terminal-card"
+
 export default function LinksysATAProvisioningPage() {
   return (
     <div className="p-6 w-full">
@@ -75,17 +77,14 @@ export default function LinksysATAProvisioningPage() {
 
               <div id="generate-password" className="space-y-4">
                 <h3 className="text-xl font-medium scroll-mt-16 dark:text-gray-200">Generate password</h3>
-                <p className="text-gray-700 dark:text-gray-300">
-                  Use Automated Password Generator (APG) Linux Command.
-                  <br />
-                  
-                  <div className="bg-black text-green-400 p-4 rounded-lg font-mono text-sm">
-                    sudo apt install apg
-                    <br />
-                    <br />
-                    apg -a 1 -M N -m 20 -n 1
-                  </div>
-                </p>
+                <div className="text-gray-700 dark:text-gray-300">
+                  <p>Use Automated Password Generator (APG) Linux Command.</p>
+                  <TerminalCard>{[
+                    "sudo apt install apg",
+                    " ",
+                    "apg -a 1 -M N -m 20 -n 1"
+                  ]}</TerminalCard>
+                </div>
                 <ul className="list-disc pl-8 space-y-2 text-gray-700 dark:text-gray-300">
                   <li>Algorithm: Pronounceable</li>
                   <li>Symbol sets: all yes</li>
@@ -100,16 +99,20 @@ export default function LinksysATAProvisioningPage() {
                 <div className="space-y-2">
                   <p className="text-gray-700 dark:text-gray-500">Navigate to <a href="https://pbx.beamspeed.net/admin/" className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">pbx.beamspeed.net/admin/</a>.</p>
                   <p className="text-gray-700 dark:text-gray-500">Login with user credentials.</p>
-                  <p className="text-gray-700 dark:text-gray-500">Click on Applications drop-down menu, then select <span className="bg-gray-200 dark:bg-gray-800 px-2 py-0.5 rounded font-mono">Extensions</span>.</p>
-                  <p className="text-gray-700 dark:text-gray-500">Select 'Generic SIP Device' as the device type, and hit <span className="bg-gray-200 dark:bg-gray-800 px-2 py-0.5 rounded font-mono">Submit</span>.</p>
+                  <p className="text-gray-700 dark:text-gray-500">Click on Applications drop-down menu, then select   </p>
+                    <span className="bg-gray-200 dark:bg-gray-800 px-2 py-0.5 rounded font-mono text-gray-100">Extensions</span>.
+                 
+                  <p className="text-gray-700 dark:text-gray-500">Select 'Generic SIP Device' as the device type, and hit  </p>
+                    <span className="bg-gray-200 dark:bg-gray-800 px-2 py-0.5 rounded font-mono text-gray-100">Submit</span>.
+                 
                 </div>
                 <ul className="list-disc pl-8 space-y-2 text-gray-700 dark:text-gray-300">
-                  <li>Add the phone number to <span className="bg-gray-200 dark:bg-gray-800 px-2 py-0.5 rounded font-mono">User Extension</span>.</li>
-                  <li>Set <span className="bg-gray-200 dark:bg-gray-800 px-2 py-0.5 rounded font-mono">Display Name</span> to something informative</li>
-                  <li>Set <span className="bg-gray-200 dark:bg-gray-800 px-2 py-0.5 rounded font-mono">Outbound CID</span> to "Name &lt;Number&gt;"</li>
-                  <li>Set <span className="bg-gray-200 dark:bg-gray-800 px-2 py-0.5 rounded font-mono">Outbound Concurrency Limit</span> to 4.</li>
-                  <li>Set <span className="bg-gray-200 dark:bg-gray-800 px-2 py-0.5 rounded font-mono">DID Description</span> to Display Name value</li>
-                  <li>Set <span className="bg-gray-200 dark:bg-gray-800 px-2 py-0.5 rounded font-mono">Add Inbound DID</span> to phone number</li>
+                  <li>Add the phone number to <span className="bg-gray-200 dark:bg-gray-800 px-2 py-0.5 rounded font-mono text-gray-100">User Extension</span>.</li>
+                  <li>Set <span className="bg-gray-200 dark:bg-gray-800 px-2 py-0.5 rounded font-mono text-gray-100">Display Name</span> to something informative</li>
+                  <li>Set <span className="bg-gray-200 dark:bg-gray-800 px-2 py-0.5 rounded font-mono text-gray-100">Outbound CID</span> to "Name &lt;Number&gt;"</li>
+                  <li>Set <span className="bg-gray-200 dark:bg-gray-800 px-2 py-0.5 rounded font-mono text-gray-100">Outbound Concurrency Limit</span> to 4.</li>
+                  <li>Set <span className="bg-gray-200 dark:bg-gray-800 px-2 py-0.5 rounded font-mono text-gray-100">DID Description</span> to Display Name value</li>
+                  <li>Set <span className="bg-gray-200 dark:bg-gray-800 px-2 py-0.5 rounded font-mono text-gray-100">Add Inbound DID</span> to phone number</li>
                   <li>Secret must be set to password</li>
                   <li>If device is on public IP, NAT is <span className="bg-gray-200 dark:bg-gray-800 px-2 py-0.5 rounded font-mono">No - RFC3581</span>. If behind router, set NAT to <span className="bg-gray-200 dark:bg-gray-800 px-2 py-0.5 rounded font-mono">Yes</span>.</li>
                   <li>Click <span className="bg-gray-200 dark:bg-gray-800 px-2 py-0.5 rounded font-mono">Submit</span> to create account in FreePBX</li>
@@ -120,9 +123,9 @@ export default function LinksysATAProvisioningPage() {
               <div id="add-auth" className="space-y-4">
                 <h3 className="text-xl font-medium scroll-mt-16 dark:text-gray-200">Add authentication credentials to VoIP Prov</h3>
                 <p className="text-gray-700 dark:text-gray-300">Add user authentication information with script.</p>
-                <div className="bg-black text-green-400 p-4 rounded-lg font-mono text-sm">
-                  ruby add-user-account.rb -u &lt;mac address&gt; --password --line &lt;line #&gt; --number &lt;phone number&gt;
-                </div>
+                <TerminalCard>{[
+                  "ruby add-user-account.rb -u &lt;mac address&gt; --password --line &lt;line #&gt; --number &lt;phone number&gt;"
+                ]}</TerminalCard>
               </div>
             </div>
           </section>
@@ -141,9 +144,10 @@ export default function LinksysATAProvisioningPage() {
               Manually issue a configuration resynchronization to make the ATA retrieve its configuration from the provisioning server.
             </p>
             
-            <div className="bg-black text-green-400 p-4 rounded-lg font-mono text-sm">
-              http://&lt;ip address&gt;/admin/resync
-            </div>
+            <TerminalCard>{[
+              "http://&lt;ip address&gt;/admin/resync"
+            ]}</TerminalCard>
+            
           </section>
 
           <div className="mt-8 p-4 border dark:border-gray-700 rounded-lg w-full overflow-hidden">

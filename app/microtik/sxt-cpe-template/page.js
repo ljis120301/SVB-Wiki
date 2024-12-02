@@ -8,7 +8,7 @@ import {
   BreadcrumbSeparator,
   BreadcrumbPage,
 } from "@/components/ui/breadcrumb"
-
+import TerminalCard from "@/components/ui/terminal-card"
 export default function SXTCPETemplatePage() {
   return (
     <div className="p-6 w-full">
@@ -64,8 +64,7 @@ export default function SXTCPETemplatePage() {
 
           <section id="wireless-setup" className="space-y-6">
             <h2 className="text-2xl font-semibold scroll-mt-16 dark:text-white">Wireless Setup</h2>
-            <div className="bg-black text-green-400 p-6 rounded-lg font-mono text-sm shadow-lg">
-              <pre className="whitespace-pre-wrap break-words leading-relaxed">
+            <TerminalCard>
 {`:global wirelessMac;
 :global wirelessPackage false;
 
@@ -85,14 +84,12 @@ export default function SXTCPETemplatePage() {
     }
   }
 }`}
-              </pre>
-            </div>
+            </TerminalCard>
           </section>
 
           <section id="bridge-config" className="space-y-6">
             <h2 className="text-2xl font-semibold scroll-mt-16 dark:text-white">Bridge Configuration</h2>
-            <div className="bg-black text-green-400 p-6 rounded-lg font-mono text-sm shadow-lg">
-              <pre className="whitespace-pre-wrap break-words leading-relaxed">
+            <TerminalCard>
 {`:if ([:len [/interface bridge find]] = 0) do={
   /interface bridge add name=bridge1 auto-mac=no admin-mac=$wirelessMac protocol-mode=none
 } else={
@@ -100,14 +97,12 @@ export default function SXTCPETemplatePage() {
 }
 
 /interface bridge port add bridge=bridge1 interface=ether1`}
-              </pre>
-            </div>
+            </TerminalCard>
           </section>
 
           <section id="firewall-filters" className="space-y-6">
             <h2 className="text-2xl font-semibold scroll-mt-16 dark:text-white">Firewall Filters</h2>
-            <div className="bg-black text-green-400 p-6 rounded-lg font-mono text-sm shadow-lg">
-              <pre className="whitespace-pre-wrap break-words leading-relaxed">
+            <TerminalCard>
 {`/interface bridge filter
 add action=accept chain=customer-filter mac-protocol=arp comment="Allow ARP"
 add action=accept chain=customer-filter mac-protocol=ip ip-protocol=udp src-port=68 dst-port=67 comment="Allow DHCP Request"
@@ -118,14 +113,12 @@ add action=drop chain=customer-filter mac-protocol=ip packet-type=multicast comm
 add action=drop chain=customer-filter mac-protocol=ip src-address=10.0.0.0/8 comment="Drop Src RFC1918 1"
 add action=drop chain=customer-filter mac-protocol=ip src-address=172.16.0.0/12 comment="Drop Src RFC1918 2"
 add action=drop chain=customer-filter mac-protocol=ip src-address=192.168.0.0/16 comment="Drop Src RFC1918 3"`}
-              </pre>
-            </div>
+            </TerminalCard>
           </section>
 
           <section id="package-management" className="space-y-6">
             <h2 className="text-2xl font-semibold scroll-mt-16 dark:text-white">Package Management</h2>
-            <div className="bg-black text-green-400 p-6 rounded-lg font-mono text-sm shadow-lg">
-              <pre className="whitespace-pre-wrap break-words leading-relaxed">
+            <TerminalCard>
 {`/system package
 #### Enable packages which are required in our installation ####
 {
@@ -138,8 +131,7 @@ add action=drop chain=customer-filter mac-protocol=ip src-address=192.168.0.0/16
     }
   }
 }`}
-              </pre>
-            </div>
+            </TerminalCard>
           </section>
 
           <div className="mt-8 p-4 border dark:border-gray-700 rounded-lg w-full overflow-hidden">

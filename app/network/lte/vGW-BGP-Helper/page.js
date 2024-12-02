@@ -22,10 +22,7 @@ export default function VGWBGPHelperPage() {
             <BreadcrumbItem className="break-all">
               <BreadcrumbLink href="/network">Network</BreadcrumbLink>
             </BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem className="break-all">
-              <BreadcrumbLink href="/network/lte">LTE</BreadcrumbLink>
-            </BreadcrumbItem>
+           
             <BreadcrumbSeparator />
             <BreadcrumbItem className="break-all">
               <BreadcrumbPage>vGW BGP Helper</BreadcrumbPage>

@@ -8,6 +8,7 @@ import {
   BreadcrumbSeparator,
   BreadcrumbPage,
 } from "@/components/ui/breadcrumb"
+import TerminalCard from "@/components/ui/terminal-card"
 
 export default function GuidePage() {
   return (
@@ -69,19 +70,19 @@ export default function GuidePage() {
               </p>
               <div className="space-y-2">
                 <p className="text-gray-700 dark:text-gray-300">For FreeBSD:</p>
-                <div className="bg-black text-green-400 p-4 rounded-lg font-mono text-sm">
+                <TerminalCard>
                   pkg install py39-ansible
-                </div>
+                </TerminalCard>
                 
                 <p className="text-gray-700 dark:text-gray-300 mt-4">For Ubuntu/Debian:</p>
-                <div className="bg-black text-green-400 p-4 rounded-lg font-mono text-sm">
+                <TerminalCard>
                   sudo apt update && sudo apt install ansible
-                </div>
+                </TerminalCard>
                 
                 <p className="text-gray-700 dark:text-gray-300 mt-4">For CentOS/RHEL:</p>
-                <div className="bg-black text-green-400 p-4 rounded-lg font-mono text-sm">
+                <TerminalCard>
                   sudo yum install epel-release && sudo yum install ansible
-                </div>
+                </TerminalCard>
               </div>
 
               <h3 className="text-xl font-medium pt-6 dark:text-gray-200">2. Network Connectivity</h3>
@@ -92,9 +93,9 @@ export default function GuidePage() {
                 <li>Verify firewall rules in pf.conf allow SSH (port 22) access</li>
                 <li>Test connectivity using ping:</li>
               </ul>
-              <div className="bg-black text-green-400 p-4 rounded-lg font-mono text-sm">
+              <TerminalCard>
                 ping -c 4 HOSTNAME_OR_IP
-              </div>
+              </TerminalCard>
 
               <h3 className="text-xl font-medium pt-6 dark:text-gray-200">3. SSH Configuration</h3>
               <p className="text-gray-700 dark:text-gray-300">
@@ -103,22 +104,23 @@ export default function GuidePage() {
               <ul className="list-disc pl-8 space-y-2 text-gray-700 dark:text-gray-300">
                 <li>Ensure SSH daemon is running:</li>
               </ul>
-              <div className="bg-black text-green-400 p-4 rounded-lg font-mono text-sm">
+              <TerminalCard>
                 service sshd status
-              </div>
+              </TerminalCard>
               <ul className="list-disc pl-8 space-y-2 text-gray-700 dark:text-gray-300">
                 <li>Enable SSH daemon if not already enabled:</li>
               </ul>
-              <div className="bg-black text-green-400 p-4 rounded-lg font-mono text-sm">
-                # Add to /etc/rc.conf:
-sshd_enable="YES"
+              <TerminalCard>
+                [ "# Add to /etc/rc.conf:",
+                  "sshd_enable=\"YES\"",
 
-# Start the service:
-service sshd start</div>
+                # Start the service:
+                service sshd start
+              </TerminalCard>
               <ul className="list-disc pl-8 space-y-2 text-gray-700 dark:text-gray-300">
                 <li>Configure SSH to allow password authentication (temporarily):</li>
               </ul>
-              <div className="bg-black text-green-400 p-4 rounded-lg font-mono text-sm">
+              <TerminalCard>
                 ee /etc/ssh/sshd_config
                 
 # Ensure these lines are set:
@@ -126,7 +128,8 @@ PasswordAuthentication yes
 PermitRootLogin no
 
 # Restart sshd after changes:
-service sshd restart</div>
+service sshd restart
+              </TerminalCard>
               <p className="text-gray-700 dark:text-gray-300 text-sm italic">
                 Note: After bootstrap, SSH will be configured to use key-based authentication only
               </p>
@@ -138,21 +141,23 @@ service sshd restart</div>
               <ul className="list-disc pl-8 space-y-2 text-gray-700 dark:text-gray-300">
                 <li>Create a new user (if needed):</li>
               </ul>
-              <div className="bg-black text-green-400 p-4 rounded-lg font-mono text-sm">
+              <TerminalCard>
                 # Add user with home directory and sh shell
 pw useradd -m -n USERNAME -s /bin/sh
                 
 # Set password for new user
-passwd USERNAME</div>
+passwd USERNAME
+              </TerminalCard>
               <ul className="list-disc pl-8 space-y-2 text-gray-700 dark:text-gray-300">
                 <li>Grant wheel access:</li>
               </ul>
-              <div className="bg-black text-green-400 p-4 rounded-lg font-mono text-sm">
-                pw groupmod wheel -m USERNAME</div>
+              <TerminalCard>
+                pw groupmod wheel -m USERNAME
+              </TerminalCard>
               <ul className="list-disc pl-8 space-y-2 text-gray-700 dark:text-gray-300">
                 <li>Configure sudo access:</li>
               </ul>
-              <div className="bg-black text-green-400 p-4 rounded-lg font-mono text-sm">
+              <TerminalCard>
                 # Install sudo if not already installed
 pkg install sudo
 
@@ -160,7 +165,8 @@ pkg install sudo
 visudo
 
 # Add the following line:
-%wheel ALL=(ALL) ALL</div>
+%wheel ALL=(ALL) ALL
+              </TerminalCard>
             </div>
 
             <div className="mt-4 bg-blue-100 dark:bg-blue-900 p-4 rounded-lg">
@@ -193,9 +199,9 @@ visudo
               To bootstrap a host, execute the bootstrap playbook using ansible-playbook.
             </p>
             
-            <div className="bg-black text-green-400 p-4 rounded-lg font-mono text-sm">
+            <TerminalCard>
               ansible-playbook playbooks/bootstrap.yml -i HOSTNAME_OR_IP, --ask-pass --ask-become-pass --user USERNAME
-            </div>
+            </TerminalCard>
 
             <p className="text-gray-700 dark:text-gray-300">
               Ansible will login, create a dedicated "ansible" user account, install sudo, and facter.

@@ -9,6 +9,7 @@ import {
   BreadcrumbSeparator,
   BreadcrumbPage,
 } from "@/components/ui/breadcrumb"
+import TerminalCard from "@/components/ui/terminal-card"
 
 export default function Catalyst3750TemplatePage() {
   const [showScrollButton, setShowScrollButton] = useState(false)
@@ -69,7 +70,7 @@ export default function Catalyst3750TemplatePage() {
 
           <section id="common-configuration" className="space-y-6">
             <h2 className="text-2xl font-semibold scroll-mt-16 dark:text-white">Common Configuration</h2>
-            <div className="bg-black text-green-400 p-6 rounded-lg font-mono text-sm shadow-lg">
+            <TerminalCard>
               <pre className="whitespace-pre-wrap break-words leading-relaxed">
 {`! Enable IP routing and Cisco Express Forwarding
 ip routing
@@ -203,7 +204,7 @@ ntp server vrf management 65.49.170.145
 ntp access-group query-only 1   ! deny all NTP control queries
 ntp access-group serve 1        ! deny all NTP time and control queries by default
 ntp access-group peer 10        ! permit time sync to configured peer(s)/server(s) only`}</pre>
-            </div>
+            </TerminalCard>
           </section>
 
           <section id="required-info" className="space-y-4">
@@ -222,7 +223,7 @@ ntp access-group peer 10        ! permit time sync to configured peer(s)/server(
 
           <section id="unique-configuration" className="space-y-6">
             <h2 className="text-2xl font-semibold scroll-mt-16 dark:text-white">Unique Configuration</h2>
-            <div className="bg-black text-green-400 p-6 rounded-lg font-mono text-sm shadow-lg">
+            <TerminalCard>
               <pre className="whitespace-pre-wrap break-words leading-relaxed">
 {`hostname <hostname>
 
@@ -286,7 +287,7 @@ line vty 0 4
 line vty 5 15
     access-class 50 in vrf-also
     transport input ssh`}</pre>
-            </div>
+            </TerminalCard>
           </section>
 
           <div className="mt-8 p-4 border dark:border-gray-700 rounded-lg overflow-x-auto">

@@ -9,6 +9,7 @@ import {
   BreadcrumbSeparator,
   BreadcrumbPage,
 } from "@/components/ui/breadcrumb"
+import TerminalCard from "@/components/ui/terminal-card"
 
 export default function BrocadeCESTemplatePage() {
   const [showScrollButton, setShowScrollButton] = useState(false)
@@ -69,9 +70,8 @@ export default function BrocadeCESTemplatePage() {
 
           <section id="common-configuration" className="space-y-6">
             <h2 className="text-2xl font-semibold scroll-mt-16 dark:text-white">Common Configuration</h2>
-            <div className="bg-black text-green-400 p-6 rounded-lg font-mono text-sm shadow-lg">
-              <pre className="whitespace-pre-wrap break-words leading-relaxed">
-{`! Do not place ports in untagged VLAN by default (if tagged)
+            <TerminalCard>
+              {`! Do not place ports in untagged VLAN by default (if tagged)
 no dual-mode-default-vlan
 
 ! Change default frame size
@@ -193,8 +193,8 @@ ntp
     server 65.49.170.145 version 4
 
 ! Blackhole route
-ip route 192.0.2.1 255.255.255.255 Null0`}</pre>
-            </div>
+ip route 192.0.2.1 255.255.255.255 Null0`}
+            </TerminalCard>
           </section>
 
           <section id="required-info" className="space-y-4">
@@ -213,9 +213,7 @@ ip route 192.0.2.1 255.255.255.255 Null0`}</pre>
 
           <section id="unique-configuration" className="space-y-6">
             <h2 className="text-2xl font-semibold scroll-mt-16 dark:text-white">Unique Configuration</h2>
-            <div className="bg-black text-green-400 p-6 rounded-lg font-mono text-sm shadow-lg">
-              <pre className="whitespace-pre-wrap break-words leading-relaxed">
-{`hostname <hostname>
+            <TerminalCard>{`hostname <hostname>
 
 ! OSPF settings
 router ospf
@@ -285,8 +283,7 @@ ip syslog source-interface loopback 1
 ip telnet source-interface loopback 1
 ip tftp source-interface loopback 1
 ntp
-    source-interface loopback 1`}</pre>
-            </div>
+    source-interface loopback 1`}</TerminalCard>
           </section>
 
           <div className="mt-8 p-4 border dark:border-gray-700 rounded-lg overflow-x-auto">

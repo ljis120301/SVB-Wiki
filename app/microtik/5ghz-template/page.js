@@ -8,6 +8,7 @@ import {
   BreadcrumbSeparator,
   BreadcrumbPage,
 } from "@/components/ui/breadcrumb"
+import TerminalCard from "@/components/ui/terminal-card"
 
 export default function fiveghzTemplate() {
   return (
@@ -17,6 +18,10 @@ export default function fiveghzTemplate() {
           <BreadcrumbList className="flex-wrap">
             <BreadcrumbItem className="break-all">
               <BreadcrumbLink href="/">Home</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem className="break-all">
+              <BreadcrumbLink href="/microtik">MicroTik</BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbSeparator />
             <BreadcrumbItem className="break-all">
@@ -56,21 +61,20 @@ export default function fiveghzTemplate() {
 
           <section id="radius-config" className="space-y-6">
             <h2 className="text-2xl font-semibold scroll-mt-16 dark:text-white">RADIUS Configuration</h2>
-            <div className="bg-black text-green-400 p-6 rounded-lg font-mono text-sm shadow-lg">
-              <pre className="whitespace-pre-wrap break-words leading-relaxed">
+            <TerminalCard>
 {`/radius
 add service=wireless,login address=65.49.170.167 secret=f3m9zx7c timeout=500ms
 add service=wireless,login address=65.49.170.152 secret=f3m9zx7c timeout=500ms
 
 /radius incoming set accept=yes`}
-              </pre>
-            </div>
+            </TerminalCard>
+            
           </section>
 
           <section id="user-config" className="space-y-6">
             <h2 className="text-2xl font-semibold scroll-mt-16 dark:text-white">User Configuration</h2>
-            <div className="bg-black text-green-400 p-6 rounded-lg font-mono text-sm shadow-lg">
-              <pre className="whitespace-pre-wrap break-words leading-relaxed">
+            <TerminalCard>
+             
 {`/user group
 add name=api-prov policy=read,write,api
 add name=deny-login
@@ -81,14 +85,12 @@ set use-radius=yes accounting=yes interim-update=5m default-group=deny-login
 /user
 set admin comment="" password=h02zAqzeq
 add name=platprov password=kraspacyeOdIvCegBax0 group=api-prov`}
-              </pre>
-            </div>
+            </TerminalCard>
           </section>
 
           <section id="system-config" className="space-y-6">
             <h2 className="text-2xl font-semibold scroll-mt-16 dark:text-white">System Configuration</h2>
-            <div className="bg-black text-green-400 p-6 rounded-lg font-mono text-sm shadow-lg">
-              <pre className="whitespace-pre-wrap break-words leading-relaxed">
+            <TerminalCard>
 {`/tool mac-server
 remove [find]
 add interface=all
@@ -99,14 +101,12 @@ add interface=all
 /ip service
 disable telnet,ftp,www,www-ssl
 enable ssh,api,winbox`}
-              </pre>
-            </div>
+            </TerminalCard>
           </section>
 
           <section id="wireless-config" className="space-y-6">
             <h2 className="text-2xl font-semibold scroll-mt-16 dark:text-white">Wireless Configuration</h2>
-            <div className="bg-black text-green-400 p-6 rounded-lg font-mono text-sm shadow-lg">
-              <pre className="whitespace-pre-wrap break-words leading-relaxed">
+            <TerminalCard>
 {`/interface bridge
 add name=bridge-provision comment="Please provision"
 
@@ -115,8 +115,7 @@ add name=radius-auth copy-from=0 radius-mac-authentication=yes radius-mac-accoun
 
 /interface wireless
 set 0 mode=ap-bridge ssid=beamspeed band=5ghz-onlyn frequency=5765 wireless-protocol=nv2 wds-mode=dynamic wds-default-bridge=bridge-provision bridge-mode=disabled default-authentication=no default-forwarding=no security-profile=radius-auth rate-selection=advanced frequency-mode=manual-txpower country="united states" hide-ssid=yes ht-rxchains=0,1 ht-txchains=0,1 nv2-security=enabled nv2-preshared-key=nabVatGhid`}
-              </pre>
-            </div>
+            </TerminalCard>
           </section>
 
           <div className="mt-8 p-4 border dark:border-gray-700 rounded-lg w-full overflow-hidden">

@@ -22,10 +22,7 @@ export default function DecodingZTEDHCPPage() {
             <BreadcrumbItem className="break-all">
               <BreadcrumbLink href="/network">Network</BreadcrumbLink>
             </BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem className="break-all">
-              <BreadcrumbLink href="/network/lte">LTE</BreadcrumbLink>
-            </BreadcrumbItem>
+            
             <BreadcrumbSeparator />
             <BreadcrumbItem className="break-all">
               <BreadcrumbPage>Decoding ZTE DHCP Client ID</BreadcrumbPage>

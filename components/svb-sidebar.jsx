@@ -147,11 +147,6 @@ const routes = [
     href: "/network",
   },
   {
-    title: "Settings",
-    icon: Settings,
-    href: "/settings",
-  },
-  {
     title: "VOIP",
     icon: Phone,
     href: "/voip",
