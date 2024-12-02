@@ -13,7 +13,7 @@ import {
   SidebarMenuButton,
   useSidebar,
 } from "@/components/ui/sidebar";
-import { Home, Settings, User2, Folder, UsersRound, EthernetPort, Phone, Waypoints, Network, Mail } from "lucide-react";
+import { Home, Settings, User2, Folder, UsersRound, EthernetPort, Phone, Waypoints, Network, Mail, ReceiptTextIcon, Share2 } from "lucide-react";
 
 const AnsibleIcon = ({ className }) => (
   <svg
@@ -113,6 +113,8 @@ const MikrotikIcon = ({ className }) => (
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 
+
+
 const routes = [
   {
     title: "Dashboard",
@@ -179,6 +181,16 @@ const routes = [
     icon: EthernetPort,
     href: "/inventory-and-ordering",
   },
+  {
+    title: "Platypus",
+    icon: ReceiptTextIcon,
+    href: "/platypus",
+  },
+  {
+    title: "Puppet",
+    icon: Share2,
+    href: "/puppet",
+  }
 ];
 
 export function AppSidebar() {

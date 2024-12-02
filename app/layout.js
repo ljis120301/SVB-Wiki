@@ -2,7 +2,8 @@ import { ThemeProvider } from "next-themes"
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
 import { AppSidebar } from "@/components/svb-sidebar"
 import { ThemeToggle } from "@/components/theme-toggle"
-import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
+import { SearchProvider } from "@/lib/searchContent"
+import Search from "@/components/Search"
 
 import localFont from "next/font/local";
 import "./globals.css";
@@ -29,23 +30,28 @@ export default function RootLayout({ children }) {
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background dark:bg-background-dark text-foreground dark:text-foreground-dark`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <SidebarProvider defaultOpen={true}>
-            <div className="relative flex min-h-screen">
-              <AppSidebar />
-              <main className="flex-1">
-                <div className="sticky top-0 z-20 flex items-center justify-between h-[65px] px-4 border-b border-border dark:border-border-dark bg-background dark:bg-background-dark">
-                  <div className="flex items-center flex-1">
-                    <SidebarTrigger className="relative z-50" />
-                    <h1 className="ml-4 text-xl font-bold text-foreground dark:text-foreground-dark truncate">
-                      Sun Valley Broadband Dashboard
-                    </h1>
+            <SearchProvider>
+              <div className="relative flex min-h-screen">
+                <AppSidebar />
+                <main className="flex-1">
+                  <div className="sticky top-0 z-20 flex items-center justify-between h-[65px] px-4 border-b border-border dark:border-border-dark bg-background dark:bg-background-dark">
+                    <div className="flex items-center flex-1">
+                      <SidebarTrigger className="relative z-50" />
+                      <h1 className="ml-4 text-xl font-bold text-foreground dark:text-foreground-dark truncate">
+                        Sun Valley Broadband Dashboard
+                      </h1>
+                    </div>
+                    <div className="ml-8">
+                      <ThemeToggle />
+                    </div>
                   </div>
-                  <div className="ml-8">
-                    <ThemeToggle />
+                  <div className="p-4 md:p-8">
+                    <Search />
+                    {children}
                   </div>
-                </div>
-                <div className="p-4 md:p-8">{children}</div>
-              </main>
-            </div>
+                </main>
+              </div>
+            </SearchProvider>
           </SidebarProvider>
         </ThemeProvider>
       </body>

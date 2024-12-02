@@ -1,29 +1,14 @@
 'use client'
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Search as SearchIcon } from 'lucide-react';
+import searchableContent from '@/lib/searchContent';
 
 export default function Search() {
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
-  const [pages, setPages] = useState([]);
   const router = useRouter();
-
-  useEffect(() => {
-    fetch('/api/pages')
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then(data => setPages(data))
-      .catch(error => {
-        console.error('Error fetching pages:', error);
-        setPages([]); // Set empty array as fallback
-      });
-  }, []);
 
   const handleSearch = (query) => {
     setSearchQuery(query);
@@ -35,7 +20,7 @@ export default function Search() {
 
     const queryLower = query.toLowerCase();
     
-    const results = pages.filter(page => 
+    const results = searchableContent.filter(page => 
       page.title.toLowerCase().includes(queryLower) ||
       page.content.toLowerCase().includes(queryLower)
     );
@@ -54,7 +39,7 @@ export default function Search() {
       <div className="relative">
         <input
           type="text"
-          placeholder="Search wiki..."
+          placeholder="Search documentation..."
           value={searchQuery}
           onChange={(e) => handleSearch(e.target.value)}
           className="w-full p-4 rounded-lg bg-secondary dark:bg-secondary-dark 

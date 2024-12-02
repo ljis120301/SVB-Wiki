@@ -26,7 +26,7 @@ export default function Home() {
       <main className="max-w-4xl mx-auto">
         <h1 className="text-3xl font-bold mb-6">Beamspeed's Wiki</h1>
 
-        <Search content={wikiContent} />
+       
 
         <section className="mb-8">
           <h2 className="text-2xl font-semibold mb-4">Table of Contents</h2>
