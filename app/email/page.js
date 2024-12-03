@@ -9,6 +9,8 @@ import {
   BreadcrumbSeparator,
   BreadcrumbPage,
 } from "@/components/ui/breadcrumb"
+import TerminalCard from "@/components/ui/terminal-card"
+
 
 export default function EmailPage() {
   const [showScrollButton, setShowScrollButton] = useState(false)
@@ -127,29 +129,24 @@ Backend server (Cyrus IMAP)`}
 
                 <div className="space-y-4">
                   <h4 className="text-lg font-semibold dark:text-white">/etc/rc.conf (FreeBSD)</h4>
-                  <div className="bg-black text-green-400 p-6 rounded-lg font-mono text-sm shadow-lg">
-                    <pre className="whitespace-pre-wrap break-words leading-relaxed">
-{`saslauthd_enable="YES"
+                  <TerminalCard>
+                    {`saslauthd_enable="YES"
 saslauthd_flags="-a pam -rc"`}
-                    </pre>
-                  </div>
+                  </TerminalCard>
 
                   <h4 className="text-lg font-semibold dark:text-white">/usr/local/etc/pam.d/[csync|imap|pop|sieve]</h4>
                   <p className="text-gray-700 dark:text-gray-300 break-words">
                     A configuration file must be created for every daemon that will authenticate against saslauthd. Currently all of the Cyrus-related daemons share the same configuration. Thus, is sufficient to create the configuration file once and create hard links for every other instance.
                   </p>
-                  <div className="bg-black text-green-400 p-6 rounded-lg font-mono text-sm shadow-lg">
-                    <pre className="whitespace-pre-wrap break-words leading-relaxed">
-{`auth            required        pam_pgsql.so    config_file=/usr/local/etc/cyrus/pam_pgsql.conf
+                  <TerminalCard>
+                    {`auth            required        pam_pgsql.so    config_file=/usr/local/etc/cyrus/pam_pgsql.conf
 account         required        pam_pgsql.so    config_file=/usr/local/etc/cyrus/pam_pgsql.conf
 password        required        pam_pgsql.so    config_file=/usr/local/etc/cyrus/pam_pgsql.conf`}
-                    </pre>
-                  </div>
+                  </TerminalCard>
 
                   <h4 className="text-lg font-semibold dark:text-white">/usr/local/etc/cyrus/pam_pgsql.conf</h4>
-                  <div className="bg-black text-green-400 p-6 rounded-lg font-mono text-sm shadow-lg">
-                    <pre className="whitespace-pre-wrap break-words leading-relaxed">
-{`connect = dbname=userdb user=mailuser password=VenRabSab8 connect_timeout=15 host=db-pgsql2.beamspeed.net
+                  <TerminalCard>
+                    {`connect = dbname=userdb user=mailuser password=VenRabSab8 connect_timeout=15 host=db-pgsql2.beamspeed.net
 
 auth_query = SELECT password
     FROM users
@@ -160,13 +157,11 @@ auth_query = SELECT password
 
 pwd_query = UPDATE users SET psasword = %p WHERE mailbox = %u
 pw_type = crypt`}
-                    </pre>
-                  </div>
+                  </TerminalCard>
 
                   <h4 className="text-lg font-semibold dark:text-white">PostgreSQL crypt support</h4>
-                  <div className="bg-black text-green-400 p-6 rounded-lg font-mono text-sm shadow-lg">
-                    <pre className="whitespace-pre-wrap break-words leading-relaxed">
-{`(cd /usr/ports/databases/postgresql84-contrib && make install)
+                  <TerminalCard>
+                    {`(cd /usr/ports/databases/postgresql84-contrib && make install)
 psql -U pgsql -d userdb -f /usr/local/share/postgresql/contrib/pgcrypto.sql
 
 # PG Crypt SELECT
@@ -174,8 +169,7 @@ SELECT true FROM users WHERE mailbox = 'blake@beamspeed.com' AND password_crypt 
 
 # PG crypt UPDATE
 UPDATE users SET password_crypt = crypt('new_pass' gen_salt('bf')) WHERE mailbox = 'blake@beamspeed.com';`}
-                    </pre>
-                  </div>
+                  </TerminalCard>
                 </div>
               </section>
 
@@ -193,23 +187,15 @@ UPDATE users SET password_crypt = crypt('new_pass' gen_salt('bf')) WHERE mailbox
                   <p className="text-gray-700 dark:text-gray-300">
                     Cyrus administrators must be defined under the admins: line in imapd.conf.
                   </p>
-                  <div className="bg-black text-green-400 p-6 rounded-lg font-mono text-sm shadow-lg">
-                    <pre className="whitespace-pre-wrap break-words leading-relaxed">
-{`admins: cyrus beamspeed_admin`}
-                    </pre>
-                  </div>
-
+                  <TerminalCard>{`admins: cyrus beamspeed_admin`}</TerminalCard>
                   <h3 className="text-xl font-semibold scroll-mt-16 dark:text-white">Logging into cyradm</h3>
                   <p className="text-gray-700 dark:text-gray-300">
                     You may login to cyradm with the following command.
                   </p>
-                  <div className="bg-black text-green-400 p-6 rounded-lg font-mono text-sm shadow-lg">
-                    <pre className="whitespace-pre-wrap break-words leading-relaxed">
-{`cyradm --user <admin user> <hostname>
+                  <TerminalCard>{`cyradm --user <admin user> <hostname>
 
 ie: cyradm --user cyrus localhost`}
-                    </pre>
-                  </div>
+                  </TerminalCard>
 
                   <h3 className="text-xl font-semibold scroll-mt-16 dark:text-white">Creating a mailbox</h3>
                   <p className="text-gray-700 dark:text-gray-300">
@@ -218,12 +204,9 @@ ie: cyradm --user cyrus localhost`}
                   <p className="text-gray-700 dark:text-gray-300">
                     Note: User authentication is handled by saslauthd which is independent from cyradm.
                   </p>
-                  <div className="bg-black text-green-400 p-6 rounded-lg font-mono text-sm shadow-lg">
-                    <pre className="whitespace-pre-wrap break-words leading-relaxed">
-{`createmailbox user/username@example.com`}
-                    </pre>
-                  </div>
-
+                    
+                  <TerminalCard>{`createmailbox user/username@example.com`}</TerminalCard>
+                  
                   <p className="text-gray-700 dark:text-gray-300">Optional tasks:</p>
                   <ul className="list-disc list-inside space-y-1 text-gray-700 dark:text-gray-300 ml-4">
                     <li>Set a quota.</li>
@@ -232,12 +215,9 @@ ie: cyradm --user cyrus localhost`}
                   <p className="text-gray-700 dark:text-gray-300">
                     These may be accomplished with the following commands:
                   </p>
-                  <div className="bg-black text-green-400 p-6 rounded-lg font-mono text-sm shadow-lg">
-                    <pre className="whitespace-pre-wrap break-words leading-relaxed">
-{`setacl user/username@example.com anonymous p0
-setquota user/username@example.com <quota in kilobytes>`}
-                    </pre>
-                  </div>
+                  <TerminalCard>{`setacl user/username@example.com anonymous p0
+setquota user/username@example.com <quota in kilobytes>`}</TerminalCard>
+                
 
                   <h3 className="text-xl font-semibold scroll-mt-16 dark:text-white">Delete mailbox</h3>
                   <p className="text-gray-700 dark:text-gray-300">
@@ -249,12 +229,9 @@ setquota user/username@example.com <quota in kilobytes>`}
                   <p className="text-gray-700 dark:text-gray-300">
                     An administrator would thus utilize the following commands to delete a mailbox.
                   </p>
-                  <div className="bg-black text-green-400 p-6 rounded-lg font-mono text-sm shadow-lg">
-                    <pre className="whitespace-pre-wrap break-words leading-relaxed">
-{`setcal user/account@example.com cyrus x
-deletemailbox user/account@example.com`}
-                    </pre>
-                  </div>
+                  <TerminalCard>{`setcal user/account@example.com cyrus x`}</TerminalCard>
+                  <TerminalCard>{`deletemailbox user/account@example.com`}</TerminalCard>
+                    
                   <p className="text-gray-700 dark:text-gray-300">
                     Note: Archived Beamspeed documentation, scripts, and configuration files may reference 'c' as the delete right instead of 'x'. This was RFC 2086 behavior and has been deprecated by RFC 4314.
                   </p>
@@ -263,8 +240,7 @@ deletemailbox user/account@example.com`}
                   <p className="text-gray-700 dark:text-gray-300">
                     Beamspeed utilizes Cyrus delayed delete feature which prevents purging from disk deleted messages and/or mailboxes until a specified interval has passed.
                   </p>
-                  <div className="bg-black text-green-400 p-6 rounded-lg font-mono text-sm shadow-lg">
-                    <pre className="whitespace-pre-wrap break-words leading-relaxed">
+                  <TerminalCard>
 {`# imapd.conf
 #
 # Delay deletion of mailboxes
@@ -276,29 +252,22 @@ deletedprefix: DELETED
 
 # Delay deletion of messages
 expunge_mode: delayed`}
-                    </pre>
-                  </div>
+                  </TerminalCard>
                   <p className="text-gray-700 dark:text-gray-300">
                     Cyrus is configured to purge deleted messages after forty-five (45) days, and deleted mailboxes after sixty (60) days. This allows plenty of time for an administrator to restore erroneously deleted messages and/or mailboxes.
                   </p>
-                  <div className="bg-black text-green-400 p-6 rounded-lg font-mono text-sm shadow-lg">
-                    <pre className="whitespace-pre-wrap break-words leading-relaxed">
+                  <TerminalCard>
 {`# cyrus.conf
 #
-EVENTS {
-  mailexpire    cmd="cyr_expire -E 7 -X 45 -D 60" at=0430
-}`}
-                    </pre>
-                  </div>
+EVENTS mailexpire    cmd="cyr_expire -E 7 -X 45 -D 60" at=0430`}
+                  </TerminalCard>
+                  
                   <p className="text-gray-700 dark:text-gray-300">
                     To recover deleted messages you must use the unexpunge (8) command. The man page shows all available command options. Utilize the following command to recover all messages deleted within -X cyr_expire time.
                   </p>
-                  <div className="bg-black text-green-400 p-6 rounded-lg font-mono text-sm shadow-lg">
-                    <pre className="whitespace-pre-wrap break-words leading-relaxed">
-{`su - cyrus
-unexpunge -a user/account@example.com`}
-                    </pre>
-                  </div>
+                  <TerminalCard>{`su - cyrus
+unexpunge -a user/account@example.com`}</TerminalCard>
+
                   <p className="text-gray-700 dark:text-gray-300">
                     If the operation was successful the script should state that it has restored the specified mailbox(es). Otherwise, it will error and expect the problem be manually remedied before continuing.
                   </p>
@@ -326,28 +295,19 @@ unexpunge -a user/account@example.com`}
                 <p className="text-gray-700 dark:text-gray-300">
                   Queries are sent in the following format:
                 </p>
-                <div className="bg-black text-green-400 p-6 rounded-lg font-mono text-sm shadow-lg">
-                  <pre className="whitespace-pre-wrap break-words leading-relaxed">
-{`&lt;username&gt;|&lt;mailbox&gt;`}
-                  </pre>
-                </div>
+                <TerminalCard>{`&lt;username&gt;|&lt;mailbox&gt;`}</TerminalCard>
+                  
                 <p className="text-gray-700 dark:text-gray-300">
                   If the user & mailbox exist, and the proper permissions are set, FUD returns a successful reply.
                 </p>
-                <div className="bg-black text-green-400 p-6 rounded-lg font-mono text-sm shadow-lg">
-                  <pre className="whitespace-pre-wrap break-words leading-relaxed">
-{`&lt;username&gt;|&lt;mailbox&gt;|&lt;new messages&gt;|&lt;timestamp of last message arrival&gt;|&lt;last accessed timestamp&gt;`}
-                  </pre>
-                </div>
+                <TerminalCard>{`&lt;username&gt;|&lt;mailbox&gt;|&lt;new messages&gt;|&lt;timestamp of last message arrival&gt;|&lt;last accessed timestamp&gt;` }</TerminalCard>
+               
                 <p className="text-gray-700 dark:text-gray-300">
                   Example query & reply:
                 </p>
-                <div className="bg-black text-green-400 p-6 rounded-lg font-mono text-sm shadow-lg">
-                  <pre className="whitespace-pre-wrap break-words leading-relaxed">
-{`Q: blake@beamspeed.com|user/blake@beamspeed.com
-R: blake@beamspeed.com|user/blake@beamspeed.com|0|1336878524|1336877639`}
-                  </pre>
-                </div>
+                <TerminalCard>{`Q: blake@beamspeed.com|user/blake@beamspeed.com
+R: blake@beamspeed.com|user/blake@beamspeed.com|0|1336878524|1336877639`}</TerminalCard>
+
                 <p className="text-gray-700 dark:text-gray-300">
                   If the username / mailbox does not exist FUD returns an error string of UNKNOWN. If the 'anonymous' user does not have right '0' then FUD retruns an error string of PERMDENY.
                 </p>
@@ -361,23 +321,18 @@ R: blake@beamspeed.com|user/blake@beamspeed.com|0|1336878524|1336877639`}
                 <p className="text-gray-700 dark:text-gray-300">
                   Replication works by having the master server (primary mailstore / replica client) connect to a replica server (backup mailstore) and push changes.
                 </p>
-                <div className="bg-black text-green-400 p-6 rounded-lg font-mono text-sm shadow-lg">
-                  <pre className="whitespace-pre-wrap break-words leading-relaxed">
-{`Primary server (replica client) --messages--&gt; Standby/backup server (replica server)`}
-                  </pre>
-                </div>
+                <TerminalCard>{`Primary server (replica client) --messages--&gt; Standby/backup server (replica server)`}</TerminalCard>
+
                 <h4 className="text-lg font-semibold dark:text-white">Configuring replication</h4>
                 <p className="text-gray-700 dark:text-gray-300">
                   To configure replication you must first enable the replication / synchronization server (syncserver) on the backup server by configuring it under SERVICES {} in cyrus.conf.
                 </p>
-                <div className="bg-black text-green-400 p-6 rounded-lg font-mono text-sm shadow-lg">
-                  <pre className="whitespace-pre-wrap break-words leading-relaxed">
-{`# Replica cyrus.conf
- SERVICES {
-   syncserver   cmd="sync_server" listen="
- }`}
-                  </pre>
-                </div>
+                <TerminalCard>{`# Replica cyrus.conf
+SERVICES 
+syncserver   cmd="sync_server" listen="
+`}
+                </TerminalCard>
+
                 <p className="text-gray-700 dark:text-gray-300">
                   This makes the backup server listen for incoming sync connections from the primary mailstore.
                 </p>
@@ -387,9 +342,7 @@ R: blake@beamspeed.com|user/blake@beamspeed.com|0|1336878524|1336877639`}
                 <p className="text-gray-700 dark:text-gray-300">
                   Note: Without rolling replication the sync_client must be manually run in order to backup the mailstore. This would typically be performed by creating an entry in the EVENT {} section of cyrus.conf
                 </p>
-                <div className="bg-black text-green-400 p-6 rounded-lg font-mono text-sm shadow-lg">
-                  <pre className="whitespace-pre-wrap break-words leading-relaxed">
-{` # Master cyrus.conf
+                <TerminalCard>{` # Master cyrus.conf
  START {
   # Sychronization client with rolling / continuious replication enabled
   syncclient     cmd="sync_client -r"
@@ -403,9 +356,8 @@ R: blake@beamspeed.com|user/blake@beamspeed.com|0|1336878524|1336877639`}
  # Kerberos realm. Not utilized.
  sync_realm:
  sync_log: yes
- guid_mode: sha1`}
-                  </pre>
-                </div>
+guid_mode: sha1`}
+                </TerminalCard>
               </section>
             </section>
           </div>

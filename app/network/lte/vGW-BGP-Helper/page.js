@@ -9,6 +9,8 @@ import {
   BreadcrumbPage,
 } from "@/components/ui/breadcrumb"
 
+import TerminalCard from "@/components/TerminalCard"
+
 export default function VGWBGPHelperPage() {
   return (
     <div className="p-6 w-full">
@@ -98,8 +100,7 @@ export default function VGWBGPHelperPage() {
 
           <section id="dhcp-config" className="space-y-4">
             <h2 className="text-2xl font-semibold scroll-mt-16 dark:text-white">Example DHCP config</h2>
-            <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg font-mono text-sm">
-              <pre className="whitespace-pre-wrap break-words">{`subnet 192.0.2.0 netmask 255.255.250.0 {
+            <TerminalCard>{`subnet 192.0.2.0 netmask 255.255.250.0 {
     option routers 192.0.2.1;
     option subnet-mask 255.255.255.0;
     ...
@@ -120,15 +121,12 @@ export default function VGWBGPHelperPage() {
     on expiry {
       execute("/usr/local/sbin/dhcpevent", "expire", clip, cgiaddr);
     }
-}`}</pre>
-            </div>
+}`}</TerminalCard>
             <p className="text-gray-700 dark:text-gray-300">
               The dhcpevent program is executed on lease event.
             </p>
-            <pre className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg font-mono text-sm">
-              {`<program>                  <event>,<IP>,<vGW>
-/usr/local/sbin/dhcpevent commit,192.0.2.1,198.51.100.2`}
-            </pre>
+            <TerminalCard>{`/usr/local/sbin/dhcpevent commit,192.0.2.1,198.51.100.2`}</TerminalCard>
+            
           </section>
 
           <section id="dhcpevent" className="space-y-4">
@@ -152,8 +150,7 @@ export default function VGWBGPHelperPage() {
             <p className="text-gray-700 dark:text-gray-300">
               The function notify_trigger is as follows:
             </p>
-            <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg font-mono text-sm">
-              <pre className="whitespace-pre-wrap break-words">{`CREATE FUNCTION notify_trigger() RETURNS TRIGGER
+            <TerminalCard>{`CREATE FUNCTION notify_trigger() RETURNS TRIGGER
 AS $$
 
   DECLARE
@@ -173,17 +170,16 @@ AS $$
     END IF;
   END;
 
-$$ LANGUAGE plpgsql;`}</pre>
-            </div>
+$$ LANGUAGE plpgsql;`}</TerminalCard>
             <p className="text-gray-700 dark:text-gray-300">
               This function is executed automatically by the database after INSERT, UPDATE, or DELETE by attaching the following TRIGGER.
             </p>
-            <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg font-mono text-sm">
-              <pre className="whitespace-pre-wrap break-words">{`CREATE TRIGGER location_trigger AFTER INSERT OR UPDATE OR DELETE
+           
+              <TerminalCard>{`CREATE TRIGGER location_trigger AFTER INSERT OR UPDATE OR DELETE
 ON locations
 FOR EACH ROW
-EXECUTE PROCEDURE notify_trigger();`}</pre>
-            </div>
+EXECUTE PROCEDURE notify_trigger();`}</TerminalCard>
+           
           </section>
 
           <section id="bgp-update" className="space-y-4">
@@ -201,8 +197,8 @@ EXECUTE PROCEDURE notify_trigger();`}</pre>
             <p className="text-gray-700 dark:text-gray-300">
               ExaBGP handles the actual BGP updates within the network. Within the BGP neighbor configuration is a process stanza which executes the advertise program. ExaBGP executes this process wherein it reads from STDIN API commands with actions to perform such as route announcements or withdraws.
             </p>
-            <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg font-mono text-sm">
-              <pre className="whitespace-pre-wrap break-words">{`neighbor 203.0.113.200 {
+           
+              <TerminalCard>{`neighbor 203.0.113.200 {
   description "route reflector";
   router-id 203.0.113.10;
   local-address 203.0.113.10;
@@ -212,8 +208,7 @@ EXECUTE PROCEDURE notify_trigger();`}</pre>
 
   process adv-vgw-routes {
     run /usr/local/etc/exabgp/advertise;
-  }`}</pre>
-            </div>
+  }`} </TerminalCard>
             <p className="text-gray-700 dark:text-gray-300">
               &apos;advertise&apos; runs in a loop, and therefore only terminates at the request of ExaBGP.
             </p>
@@ -233,9 +228,7 @@ LISTEN for updates --> print to STDOUT on update
             <p className="text-gray-700 dark:text-gray-300">
               Notifcations received from PostgreSQL contain all the information necessary to facilitate the route announcement. The program simply listens for these notification, and performs the desired action by printing the appropriate ExaBGP API command. For example:
             </p>
-            <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg font-mono text-sm">
-              <pre className="whitespace-pre-wrap break-words">announce route 192.0.2.1/32 next-hop 198.51.100.2</pre>
-            </div>
+            <TerminalCard>{`announce route 192.0.2.1/32 next-hop 198.51.100.2`}</TerminalCard>
             <p className="text-gray-700 dark:text-gray-300">
               Traffic to the host is now properly routed from the upstream aggregation route to the correct virtual gateway thus successfully achieving the same functionality that would be realized if the BGP update function exited in the vGW.
             </p>

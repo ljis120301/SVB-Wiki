@@ -9,7 +9,7 @@ import {
   BreadcrumbSeparator,
   BreadcrumbPage,
 } from "@/components/ui/breadcrumb"
-
+import TerminalCard from '@/components/TerminalCard'
 export default function PlatypusPage() {
   const [showScrollButton, setShowScrollButton] = useState(false)
 
@@ -125,14 +125,19 @@ export default function PlatypusPage() {
             <p className="text-gray-700 dark:text-gray-300">
               Unless otherwise noted in the application's README, an app may be deployed by using the following procedure. We will use the wimax-svc application for our example.
             </p>
-            <div className="bg-gray-50 dark:bg-gray-800 p-4 sm:p-6 rounded-lg">
-              <ol className="list-decimal list-inside space-y-2 text-gray-700 dark:text-gray-300">
-                <li>git checkout http://gitlab.beamspeed.net/platypus/platypus-wimax-svc</li>
-                <li>cd platypus-wimax-svc</li>
-                <li>Modify config.yml with application specific parameters.</li>
-                <li>cap production deploy</li>
-              </ol>
-            </div>
+              
+             
+             
+                <TerminalCard>
+                  {`git checkout http://gitlab.beamspeed.net/platypus/platypus-wimax-svc`}
+                  {' '}
+                  {`cd platypus-wimax-svc`}
+                  {' '}
+                  {`Modify config.yml with application specific parameters.`}
+                  {' '}
+                  {`cap production deploy`}
+              </TerminalCard>
+         
             <p className="text-gray-700 dark:text-gray-300">
               The application will then installed on an application server at the path specified in deploy_to of config/deploy.rb, and several application symlinks will be created in /usr/local/platpusd/secure_dir/ which allow the Platypus Daemon to execute the command.
             </p>
@@ -146,9 +151,7 @@ export default function PlatypusPage() {
             <p className="text-gray-700 dark:text-gray-300">
               By default, Capistrano keeps 5 previous releases cached on the server to allow quick rollback if necessary. To rollback to the previously deployed (stable) release, simply execute:
             </p>
-            <div className="bg-gray-50 dark:bg-gray-800 p-4 sm:p-6 rounded-lg">
-              <code className="text-gray-700 dark:text-gray-300">cap production deploy:rollback</code>
-            </div>
+            <TerminalCard>{`cap production deploy:rollback`}</TerminalCard>
           </section>
 
           <div className="mt-8 p-4 border dark:border-gray-700 rounded-lg overflow-x-auto">

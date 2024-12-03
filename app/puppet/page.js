@@ -10,6 +10,9 @@ import {
   BreadcrumbPage,
 } from "@/components/ui/breadcrumb"
 
+import TerminalCard from "@/components/ui/terminal-card"
+
+
 export default function PuppetPage() {
   const [showScrollButton, setShowScrollButton] = useState(false)
 
@@ -94,15 +97,12 @@ export default function PuppetPage() {
             <p className="text-gray-700 dark:text-gray-300">
               Puppet installation on FreeBSD 10.x is straightforward. If this is a fresh system, ensure Pkg is installed.
             </p>
-            <div className="bg-gray-50 dark:bg-gray-800 p-4 sm:p-6 rounded-lg">
-              <code className="text-gray-700 dark:text-gray-300">sudo pkg</code>
-            </div>
+            <TerminalCard>sudo pkg</TerminalCard>
+              
             <p className="text-gray-700 dark:text-gray-300">
               Then, install Puppet from the FreeBSD package repositories.
             </p>
-            <div className="bg-gray-50 dark:bg-gray-800 p-4 sm:p-6 rounded-lg">
-              <code className="text-gray-700 dark:text-gray-300">sudo pkg install puppet</code>
-            </div>
+            <TerminalCard>sudo pkg install puppet</TerminalCard>
           </section>
 
           <section id="ubuntu" className="space-y-6">
@@ -119,33 +119,28 @@ export default function PuppetPage() {
             <p className="text-gray-700 dark:text-gray-300">
               For example, to enable the Puppet Labs repo for Ubuntu 14.04 you would first download the package necessary for configuring the APT repo.
             </p>
-            <div className="bg-gray-50 dark:bg-gray-800 p-4 sm:p-6 rounded-lg">
-              <code className="text-gray-700 dark:text-gray-300">wget https://apt.puppetlabs.com/puppetlabs-release-trusty.deb</code>
-            </div>
+            <TerminalCard>wget https://apt.puppetlabs.com/puppetlabs-release-trusty.deb</TerminalCard>
+            
             <p className="text-gray-700 dark:text-gray-300">
               Once the package is downloaded, install it with dpkg.
             </p>
-            <div className="bg-gray-50 dark:bg-gray-800 p-4 sm:p-6 rounded-lg">
-              <code className="text-gray-700 dark:text-gray-300">sudo dpkg -i puppetlabs-release-trusty.deb</code>
-            </div>
+            <TerminalCard>sudo dpkg -i puppetlabs-release-trusty.deb</TerminalCard>
+            
             <p className="text-gray-700 dark:text-gray-300">
               This installs the Puppet Labs apt source file in /etc/apt/sources.list.d.
             </p>
             <p className="text-gray-700 dark:text-gray-300">
               Then update your APT repo list by running:
             </p>
-            <div className="bg-gray-50 dark:bg-gray-800 p-4 sm:p-6 rounded-lg">
-              <code className="text-gray-700 dark:text-gray-300">sudo apt-get update</code>
-            </div>
+            <TerminalCard>sudo apt-get update</TerminalCard>
+            
             <p className="text-gray-700 dark:text-gray-300">
               This will scan the newly added Puppet Labs repo for available packages, and prefer them over the Ubuntu packages since they are a more recent release.
             </p>
             <p className="text-gray-700 dark:text-gray-300">
               Finally, Install Puppet
             </p>
-            <div className="bg-gray-50 dark:bg-gray-800 p-4 sm:p-6 rounded-lg">
-              <code className="text-gray-700 dark:text-gray-300">sudo apt-get install puppet</code>
-            </div>
+            <TerminalCard>sudo apt-get install puppet</TerminalCard>
           </section>
 
           <section id="running-puppet" className="space-y-6">
@@ -153,9 +148,7 @@ export default function PuppetPage() {
             <p className="text-gray-700 dark:text-gray-300">
               Once Puppet is installed, it needs to be configured to communicate with the Puppet Master. To do so, execute
             </p>
-            <div className="bg-gray-50 dark:bg-gray-800 p-4 sm:p-6 rounded-lg">
-              <code className="text-gray-700 dark:text-gray-300">sudo puppet agent --test --pluginsync</code>
-            </div>
+            <TerminalCard>sudo puppet agent --test --pluginsync</TerminalCard>
             <p className="text-gray-700 dark:text-gray-300">
               The Puppet agent will first generate a private SSL key which is used to secure communication with the Puppet Master. It will also generate a Certificate Signing Request (CSR) which it send to the Puppet Master so it can be issued a public certificate.
             </p>
@@ -165,24 +158,18 @@ export default function PuppetPage() {
             <p className="text-gray-700 dark:text-gray-300">
               If you need to specify an alternate server address you can do so with the --server flag.
             </p>
-            <div className="bg-gray-50 dark:bg-gray-800 p-4 sm:p-6 rounded-lg">
-              <code className="text-gray-700 dark:text-gray-300">sudo puppet agent --test --pluginsync --server=puppet.beamspeed.net</code>
-            </div>
+            <TerminalCard>sudo puppet agent --test --pluginsync --server=puppet.beamspeed.net</TerminalCard>
             <p className="text-gray-700 dark:text-gray-300">
               At this point the Puppet is waiting its certificate to be signed. The agent cannot receive provisioning information from the Master until this process is complete.
             </p>
             <p className="text-gray-700 dark:text-gray-300">
               To sign the certificate login to puppetmaster server and execute the following command:
             </p>
-            <div className="bg-gray-50 dark:bg-gray-800 p-4 sm:p-6 rounded-lg">
-              <code className="text-gray-700 dark:text-gray-300">sudo puppet cert sign &lt;client hostname&gt;.beamspeed.net</code>
-            </div>
+            <TerminalCard>sudo puppet cert sign &lt;client hostname&gt;.beamspeed.net</TerminalCard>
             <p className="text-gray-700 dark:text-gray-300">
               Re-run puppet agent on the client server to retrieve the server's catalog, and complete provisioning control by Puppet.
             </p>
-            <div className="bg-gray-50 dark:bg-gray-800 p-4 sm:p-6 rounded-lg">
-              <code className="text-gray-700 dark:text-gray-300">sudo puppet agent --test</code>
-            </div>
+            <TerminalCard>sudo puppet agent --test</TerminalCard>
             <p className="text-gray-700 dark:text-gray-300">
               You will see plenty of output on your screen as Puppet modifies the server's configuration to bring it in line with the configured node profile.
             </p>
@@ -200,9 +187,7 @@ export default function PuppetPage() {
             <p className="text-gray-700 dark:text-gray-300">
               At times it maybe be necessary to revoke a certificate for an agent that you no longer want to manage with the Puppet Master. To do so, sign into the Puppet Master and execute:
             </p>
-            <div className="bg-gray-50 dark:bg-gray-800 p-4 sm:p-6 rounded-lg">
-              <code className="text-gray-700 dark:text-gray-300">sudo puppet cert revoke &lt;hostname&gt;.beamspeed.net</code>
-            </div>
+            <TerminalCard>sudo puppet cert revoke &lt;hostname&gt;.beamspeed.net</TerminalCard>
             <p className="text-gray-700 dark:text-gray-300">
               This prevents further communication from the Agent to the Master as well as prevents the certficate hostname from being utilized by future nodes in the network.
             </p>
@@ -212,9 +197,7 @@ export default function PuppetPage() {
             <p className="text-gray-700 dark:text-gray-300">
               To revoke the cert, and delete the hostname from Puppet so it may be reused execute:
             </p>
-            <div className="bg-gray-50 dark:bg-gray-800 p-4 sm:p-6 rounded-lg">
-              <code className="text-gray-700 dark:text-gray-300">sudo puppet cert clean &lt;hostname&gt;.beamspeed.net</code>
-            </div>
+            <TerminalCard>sudo puppet cert clean &lt;hostname&gt;.beamspeed.net</TerminalCard>
           </section>
 
           <section id="r10k" className="space-y-6">
