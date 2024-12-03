@@ -250,24 +250,7 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter className="border-t border-border dark:border-border-dark p-4 mt-auto">
-        <SidebarMenu>
-          <SidebarMenuItem>
-            <SidebarMenuButton 
-              className={cn(
-                "text-foreground dark:text-foreground-dark",
-                "hover:bg-secondary dark:hover:bg-secondary-dark transition-colors",
-                "[&_[data-mobile=true]]:text-foreground [&_[data-mobile=true]]:dark:text-foreground-dark",
-                "[&_[data-mobile=true]]:hover:bg-secondary [&_[data-mobile=true]]:dark:hover:bg-secondary-dark"
-              )}
-              tooltip="Profile"
-            >
-              <User2 className="h-4 w-4" />
-              <span>Profile</span>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-        </SidebarMenu>
-      </SidebarFooter>
+      
     </Sidebar>
   );
 }
